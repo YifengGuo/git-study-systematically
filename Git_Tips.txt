@@ -1,7 +1,14 @@
 1. Git Basic
 	$ git init
 	$ git add 
+		put all the changes to be committed to the Stage
 	$ git commit -m "message"
+		commit all the changes to the branch
+
+	Working directory
+	Repository(/.git): -----> Stage
+					   -----> master
+
 	$ git status
 	# tell us the files conditions
 	# example: On branch master
@@ -14,10 +21,13 @@
 		no changes added to commit (use "git add" and/or "git commit -a")
 
 	$ git diff
-	# to compare working directory content with stage (content on stage is what has been added but not committed)
+	# to compare working directory content with Stage (content on Stage is what has been added but not committed)
 
 	$ git diff --cache
-	# to compare stage with master
+	# to compare Stage with master
+
+	$ git diff HEAD
+	# compare content in Stage with latest version in .git
 
 	$ git log
 	# to check historical record of version control
@@ -65,3 +75,29 @@
 		$ git reflog  # check all the historical versions
 		$ git reset --hard commit_id
 		# give us a chance to reset to any version before even we have reset to some older version
+
+
+	2.3. Manage changes: Git is designed to manage changes instead of files
+			git add will only put content in working directory into Stage
+			change -> git  add ...  ->  change -> git commit -m "..."
+			then secont change will not be put into Stage, we could add
+			multiple times and then commit altogether
+
+	2.4 Discard changes
+		$ git checkout -- file_name
+		# could discard changes in working directory
+			case 1: file has not been put to Stage after changes (not added)
+			case 2: file has been put to Stage and bad changes happen after file is in the Stage
+					but bad changes have not been added
+			both cases, git checkout will put file back to latest git commit or git add contidion
+
+			case 3: bad changes existed in the file and the file was added to Stage but not committed
+			$ git reset HEAD file_name
+			# git reset can not only reset to historical versions, but also can discard changes in the Stage
+			# and put all the changes back to working directory
+			# then if we need to discard changes in the working directory, we can use git checkout -- file_name
+
+
+			case 4: bad changes existed in the file and the file was added and also commited to branch
+			        but has not been pushed to remote repo (not pushed)
+			
