@@ -61,4 +61,6 @@
 		$ cat xxx.file
 		# take a look at the file of latest version
 
-		
+		$ git reflog  # check all the historical versions
+		$ git reset --hard commit_id
+		# give us a chance to reset to any version before even we have reset to some older version
