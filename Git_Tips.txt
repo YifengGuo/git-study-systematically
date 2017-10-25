@@ -124,6 +124,22 @@
 					# So actually "git checkout" is to replace files in working directory with files in the .git
 
 3. Remote Repository
-	
+	3.1 Initialize SSH Key for your PC with Github
+		step 1: init SSH Key (if the pc does not have .ssh/)
+			$ ssh-keygen -t rsa -C "youremail@example.com"
+			# then we will have a .ssh/ directory which contains id_rsa and id_rsa.pub
+			# id_rsa is private key which cannot be revealed to others
+			# id_rsa.pub is public key which can be revealed to others
+		step 2: Log in to Github and access to SSH settings
+				Name a title for the key
+				Add SSH Key with your id_rsa.pub
+	Then each time when use this computer clone or push contents from or to this Github address, we 
+	do not need to input username and password for the Github knows that I am the authenticate user 
+	of this address
 
+	3.2 new remote repo
+
+	3.2 git clone (https and SSH)
+
+4. Branch Management
 			
