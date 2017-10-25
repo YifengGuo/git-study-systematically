@@ -100,4 +100,30 @@
 
 			case 4: bad changes existed in the file and the file was added and also commited to branch
 			        but has not been pushed to remote repo (not pushed)
+			$ git reflog
+			# to find last good version
+			$ git reset --hard commit_id
+			# reset to that good version
+			# then the content in the /.git(repo) is good
+
+			However, if we committed bad changes and push it to the remote repo, the consequence is serious!!!!
+
+	2.5 Remove files: in Git, removing files is also a kind of change
+			we remove the file by rm file_name or directly delete it,and git status told us the file is 
+			changed since working directory is not corresponding with .git. So we have two choices here:
+				choice 1: we do want to delete the file, so we need to remove it from .git as well:
+					$ git rm file_name 
+					# remove files in working directory and Stage
+					$ git commit -m "remove xxx file" 
+					# after commit, the file in .git will be removed as well
+					# then the file is removed from .git
+					# if we call git rm file_name by mistake, use git reset --hard VERSION_ID back to where we want
+				choice 2: we delete the file by mistake, and we want to retrieve the file. Then git can help us.
+					$ git checkout -- file_name
+					# Then the wrongly removed file is retrieved with its latest version to local 
+					# So actually "git checkout" is to replace files in working directory with files in the .git
+
+3. Remote Repository
+	
+
 			
