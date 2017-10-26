@@ -251,3 +251,91 @@
 	    	$ git checkout -b <branch_name> # initialize + switch to new branch
 	    	$ git merge <branch_name> # merge chosen branch with current (HEAD_pointed) branch
 	    	$ git branch -d <branch_name> # remove chosen branch
+
+	4.3 Handle Conflicts
+	Assume we have a file called test_for_conflict_handle.txt
+	and have some content created by master at very beginning
+		4.3.1 initialize a new branch
+			$ git checkout -b 'feature1'
+			# and then create something new at the end of file
+			$ git add file_name.txt
+			$ git commit -m "changed by feature1"
+
+		4.3.2 switch back to master and make some changes
+			$ git checkout master
+			# when switch back to master, git will notify us
+			# that Switched to branch 'master'
+			# Your branch is ahead of 'origin/master' by 1 commit.
+            # (use "git push" to publish your local commits)
+
+            # at this moment we cannot see changes made by feature1
+            # then make some change at the end of file
+            $ git add file_name.txt
+            $ git commit -m "changed by master"
+
+        4.3.3 conflict detected
+        	# now master and feature have latest commit on their own branch
+        	# it is like:
+        							HEAD
+							          |
+							         \ /
+							        master
+							          |
+							         \ /
+			V1   -----  V2    ------   V3  -------   V4
+                                        |
+                                        |---------   v4`
+                                                     / \
+                                                      |
+                                                     feature1
+            # if we try to merge master with feature1 now
+            $ git merge feature1                                          
+        	# the git now will report conflict:
+        	# Auto-merging file_name.txt
+            # CONFLICT (content): Merge conflict in file_name.txt
+            # Automatic merge failed; fix conflicts and then commit the result.
+            # and 'git status' can also tell us the conflict info
+
+        4.3.4 examine and handle conflict
+        	$ cat file_name.txt (subl file_name.txt)
+        	# the git will show conflict position to us:
+        	# flict_handle.txt 
+				Created by master
+				<<<<<<< HEAD
+				changed by master 2nd time
+				=======
+				Changed by branch feature1
+				>>>>>>> feature1
+			# <<<<<<<, ========, >>>>>>>> can mark out different branches content
+			# and we can amend conflict content to uniformed content manually
+
+			# after amending conflict content
+			$ git add file_name.txt
+			# git commit -m "conflict fixed"
+
+			# now the timeline is like:
+				        							HEAD
+											          |
+											         \ /
+											        master
+											          |
+											         \ /
+			V1   -----  V2    ------   V3  -------   V4   ---------- v5
+                                        |                             |
+                                        |---------   v4`  ------------
+                                                     / \
+                                                      |
+                                                     feature1
+
+            # we can also use
+            $ git log --graph --pretty=oneline --abbrev-commit
+            # to check branch info
+
+				*   490aba7 conflict fixed
+				|\  
+				| * 9284363 feature1 change 1st time
+				* | 647b6b7 master change 2nd time
+				|/  
+
+		4.3.5 remove feature1
+			$ git branch -d feature1
