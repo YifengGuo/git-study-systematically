@@ -141,5 +141,111 @@
 
 	3.2 git clone (https and SSH)
 
-4. Branch Management
-			
+4. Branch Management 
+	4.1 Git will construct all commits as a timeline, and there is only one timeline called master if no other branch.
+		HEAD actually is pointing to master, and master is pointing to latest commit.
+								  HEAD
+								   | 
+								  \ /
+								 master
+								   |
+								  \ /
+		V1   -----  V2    ------   V3
+		And each time we commit, master will advance forward by one step
+
+	4.2 Initialize and manage new branch
+
+		4.2.1 Initialize a new branch
+		$ git checkout -b dev
+		# the command is to initialize and switch to a new branch 'dev'
+		# this cmd equals:
+		# $ git branch dev
+		# $ git checkout dev
+
+		4.2.2 examine currently used branches
+		$ git branch # list all branches
+		# result:
+		  * dev
+		    master
+		* represents currently used branch
+
+
+									master
+									   |
+									  \ /
+			V1   -----  V2    ------   V3
+									  / \
+	                                   |
+	                                  dev
+	                                  / \
+	                                   |
+	                                   HEAD
+	    4.2.3 merge branches
+	    	 Assume we did some changes on dev branch and commit the changes
+	    	 Then we change branch back to master, we would find content on 
+	    	 master has no change, for we did not commit any change on master
+
+	    	before merge:
+
+	                                  HEAD
+	                                   |
+	                                  \ /
+							        master
+					                   |
+					                  \ /
+			V1   -----  V2    ------   V3  -------   V4
+									                 / \
+	                                                  |
+	                                                 dev
+
+	        So we need to merge result on dev with master
+	        $ git merge dev
+	        # git merge branch_name:  is to merge chosen
+	        # branch with current(HEAD_pointed) branch
+
+	        after merge:
+
+	                                                 HEAD
+	        	                                      |
+	                                                 \ /
+	        								       master
+									                  |
+									                 \ /
+			V1   -----  V2    ------   V3  -------   V4
+									                 / \
+	                                                  |
+	                                                 dev
+
+	    4.2.4 delete useless branch
+	    	after merging branches, some branch(es) may become
+	    	useless, then we can directly delete them.
+
+	    	$ git branch -d dev
+	    	# delete dev branch
+
+	    	after deleting dev
+	    		                                     HEAD
+	        	                                      |
+	                                                 \ /
+	        								       master
+									                  |
+									                 \ /
+			V1   -----  V2    ------   V3  -------   V4
+
+
+	        After accomplishing the task on dev, then make master point to dev's current commit, 
+	        the merge process is done simply.
+	        Then we can remove dev branch and after that we again have only one branch master which
+	        points to the latest commit
+	        $ git branch
+	        * master
+
+
+
+	    4.2.4 Summary
+	    	$ git branch # examine branches
+	    	$ git branch <branch_name> # initialize new branch
+	    	$ git checkout <branch_name> # switch to chosen branch
+	    	$ git checkout -b <branch_name> # initialize + switch to new branch
+	    	$ git merge <branch_name> # merge chosen branch with current (HEAD_pointed) branch
+	    	$ git branch -d <branch_name> # remove chosen branch
