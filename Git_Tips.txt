@@ -144,12 +144,12 @@
 4. Branch Management 
 	4.1 Git will construct all commits as a timeline, and there is only one timeline called master if no other branch.
 		HEAD actually is pointing to master, and master is pointing to latest commit.
-								  HEAD
-								   | 
-								  \ /
-								 master
-								   |
-								  \ /
+                                   HEAD
+                                    | 
+                                   \ /
+                                  master
+                                    |
+                                   \ /
 		V1   -----  V2    ------   V3
 		And each time we commit, master will advance forward by one step
 
@@ -170,16 +170,16 @@
 		* represents currently used branch
 
 
-									master
-									   |
-									  \ /
+                                     master
+                                       |
+                                      \ /
 			V1   -----  V2    ------   V3
-									  / \
-	                                   |
-	                                  dev
-	                                  / \
-	                                   |
-	                                   HEAD
+                                      / \
+                                       |
+                                      dev
+                                      / \
+                                       |
+                                      HEAD
 	    4.2.3 merge branches
 	    	 Assume we did some changes on dev branch and commit the changes
 	    	 Then we change branch back to master, we would find content on 
@@ -187,16 +187,16 @@
 
 	    	before merge:
 
-	                                  HEAD
-	                                   |
-	                                  \ /
-							        master
-					                   |
-					                  \ /
+                                      HEAD
+                                       |
+                                      \ /
+                                     master
+                                       |
+                                      \ /
 			V1   -----  V2    ------   V3  -------   V4
-									                 / \
-	                                                  |
-	                                                 dev
+                                                    / \
+                                                     |
+                                                    dev
 
 	        So we need to merge result on dev with master
 	        $ git merge dev
@@ -205,16 +205,16 @@
 
 	        after merge:
 
-	                                                 HEAD
-	        	                                      |
-	                                                 \ /
-	        								       master
-									                  |
-									                 \ /
+                                                    HEAD
+                                                      |
+                                                     \ /
+                                                   master
+                                                      |
+                                                     \ /
 			V1   -----  V2    ------   V3  -------   V4
-									                 / \
-	                                                  |
-	                                                 dev
+                                                     / \
+                                                      |
+                                                     dev
 
 	    4.2.4 delete useless branch
 	    	after merging branches, some branch(es) may become
@@ -224,12 +224,12 @@
 	    	# delete dev branch
 
 	    	after deleting dev
-	    		                                     HEAD
-	        	                                      |
-	                                                 \ /
-	        								       master
-									                  |
-									                 \ /
+                                                    HEAD
+                                                      |
+                                                     \ /
+                                                    master
+                                                      |
+                                                     \ /
 			V1   -----  V2    ------   V3  -------   V4
 
 
@@ -249,3 +249,4 @@
 	    	$ git checkout -b <branch_name> # initialize + switch to new branch
 	    	$ git merge <branch_name> # merge chosen branch with current (HEAD_pointed) branch
 	    	$ git branch -d <branch_name> # remove chosen branch
+
