@@ -122,7 +122,8 @@
 				choice 2: we delete the file by mistake, and we want to retrieve the file. Git can help us.
 					$ git checkout -- file_name
 					# Then the wrongly removed file is retrieved with its latest version to local 
-					# So actually "git checkout" is to replace files in working directory with files in                                         # the .git
+					# So actually "git checkout" is to replace files in working directory with files in 
+                                        # the .git
 
 3. Remote Repository
 	3.1 Initialize SSH Key for your PC with Github
