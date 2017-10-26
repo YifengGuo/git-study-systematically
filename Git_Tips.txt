@@ -244,7 +244,7 @@
 
 
 
-	    4.2.4 Summary
+	    4.2.5 Summary
 	    	$ git branch # examine branches
 	    	$ git branch <branch_name> # initialize new branch
 	    	$ git checkout <branch_name> # switch to chosen branch
@@ -337,5 +337,5 @@
 				* | 647b6b7 master change 2nd time
 				|/  
 
-		4.3.5 remove feature1
-			$ git branch -d feature1
+	4.3.5 remove feature1
+		$ git branch -d feature1
