@@ -444,6 +444,18 @@
                 $ git stash appply  stash@{0} # {stash_id}
 
 
+    4.6 Force delete unmerged branch
+
+    	If we want to delete an unmerged branch like a feature
+    	$ git branch -d feature
+        # error: The branch 'feature' is not fully merged.
+        # If you are sure you want to delete it, run 'git branch -D feature'.
+
+        $ git branch -D feature
+        # to force delete feature
+
+
+
 
 
 
