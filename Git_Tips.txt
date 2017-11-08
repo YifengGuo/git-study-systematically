@@ -390,7 +390,58 @@
     			since we haven't finished it yet. And the bug fix job is urgent and 
     			cannot wait until we complte the work. How to satisfy both issues?
 
-    			Git has a utility called stash 
+    			Git has a utility called stash which can store current work 
+    			for future continuation. After stashing, we can checkout to
+    			other branch to do other task like fixing a bug we need.
+
+    			$ git stash
+                # Saved working directory and index state WIP on dev: 8b548c9 dev first commit
+                # HEAD is now at 8b548c9 dev first commit
+                # now if we call git status, we can find working directory is clean
+
+                # switch back to master
+                # and inialize special branch to fix bug
+                $ git checkout master
+                $ git checkout -b issue-101
+
+                # fix the bug
+                $ git add bug_fixed_file_name
+                $ git commit -m "fix bug 101"
+
+                # switch back to master and merge master with issue-101, then delete issue-101
+                $ git checkout master
+                $ git merge --no-ff -m "merged bug fix 101" issue-101
+                # Merge made by the 'recursive' strategy.
+                # local_repo_management/fix_bug.txt | 0
+                # 1 file changed, 0 insertions(+), 0 deletions(-)
+                $ git branch -d issue-101 # delete aux branch
+
+                # switch back to dev and continue the stashed incomplete work
+                $ git checkout dev
+                # to checkout stashed work, use git stash list
+                $ git stash list
+                # stash@{0}: WIP on dev: 8b548c9 dev first commit
+
+                # two way to retrieve the stashed work
+                # 1. git stash apply + git stash drop to retrieve work and delete stash
+                # 2. git stash pop  --> directly retrieve and delete stash
+                $ git stash pop 
+                On branch dev
+                # Changes not staged for commit:
+               		 (use "git add <file>..." to update what will be committed)
+                #	 (use "git checkout -- <file>..." to discard changes in working directory)
+
+	            # 		 modified:   test_for_stash_bug_fix.txt
+
+                # no changes added to commit (use "git add" and/or "git commit -a")
+                # Dropped refs/stash@{0} (c806584683fc2bf1be2d406a352bd5aa77c98c0e)
+
+                $ git stash list
+                # now the stash is empty
+
+                # we can stash multiple works
+                # to retrieve particular work:
+                $ git stash appply  stash@{0} # {stash_id}
 
 
 
