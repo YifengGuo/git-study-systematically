@@ -337,5 +337,51 @@
 				* | 647b6b7 master change 2nd time
 				|/  
 
-	4.3.5 remove feature1
-		$ git branch -d feature1
+		4.3.5 remove feature1
+			$ git branch -d feature1
+
+	4.4 Branch Management Strategy
+
+		4.4.1 --no--ff Merge Mode
+			Git will use Fast forward mode to merge branches by default.
+
+			But under this mode, if we delete branch, the info of branch
+	  		will be discarded as well.
+
+		    If we force to disable Fast forward mode, Git will initialize a
+		    new commit while merging and we can checkout historical info of
+			branches from log (--no-ff)
+
+			# initialize and switch to branch dev
+			$ git checkout -b dev
+
+			# do something change to file_name.txt
+			$ git add file_name.txt
+			$ git commit -m "modified by dev"
+
+			# switch back to master
+			$ git checkout master
+
+			# merge master and dev by --no-ff Mode
+			# because under --no-ff mode, merge will initialize a new commit
+			# so we need to explictly name a commit with message m
+			$ git merge commit -m "merge by --no-ff" dev
+
+			# Merge made by the 'recursive' strategy.
+ 			# local_repo_management/test_branch_management_strategy.txt | 4 +++-
+ 			# 1 file changed, 3 insertions(+), 1 deletion(-)
+
+ 			# after merging master with dev by --no-ff mode
+ 			# we can checkout log to see how the mode works
+
+            *   4ad595b merge with no-ff
+            |\  
+            | * ff2d105 amended by branch dev
+            |/  
+
+
+
+
+
+
+
