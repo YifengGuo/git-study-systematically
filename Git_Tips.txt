@@ -380,6 +380,18 @@
             |/  
 
 
+    4.5 Bug Branch
+    	Use case:
+    			We can use a branch to fix a certain bug we meet during development
+    			After we fix the bug, then we merge the auxiliary branch with master
+    			and then remove aux branch.
+    			However, assume we are working on the dev branch, and we need to fix
+    			a bug named issue-101. But at this moment we cannot commit out work
+    			since we haven't finished it yet. And the bug fix job is urgent and 
+    			cannot wait until we complte the work. How to satisfy both issues?
+
+    			Git has a utility called stash 
+
 
 
 
