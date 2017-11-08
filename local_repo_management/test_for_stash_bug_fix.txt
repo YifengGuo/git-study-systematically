@@ -1,0 +1,15 @@
+...
+
+
+
+...
+
+
+
+
+current work so far
+
+
+Now we need to fix a bug which I need to initialize a special branch for it
+But I cannot commit my work since I did not finish it.
+So I can use git stash to store my current work for future continuation
